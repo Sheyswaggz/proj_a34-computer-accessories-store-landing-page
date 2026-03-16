@@ -1,0 +1,541 @@
+/* Animation Styles - Keyframes and Transition Effects
+   Computer Accessories Store Landing Page
+   ================================================== */
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In Down Animation */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide Up Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In Left Animation */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In Right Animation */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale In Animation */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Zoom In Animation */
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Shimmer Animation for Skeleton Loading */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Gradient Animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Kinetic Typography - Letter Reveal Animation */
+@keyframes letterReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) rotateX(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+/* Kinetic Typography - Word Slide Animation */
+@keyframes wordSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Kinetic Typography - Typewriter Effect */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Kinetic Typography - Blink Cursor */
+@keyframes blinkCursor {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Rotate Animation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Scroll-Triggered Reveal Classes */
+.reveal {
+  opacity: 1;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal.hidden {
+  opacity: 0;
+}
+
+.reveal-fade {
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.reveal-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.reveal-down {
+  animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.reveal-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.reveal-right {
+  animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.reveal-scale {
+  animation: scaleIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.reveal-zoom {
+  animation: zoomIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Staggered Animation Delays for Sequential Reveals */
+.reveal-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.reveal-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.reveal-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.reveal-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.reveal-delay-500 {
+  animation-delay: 0.5s;
+}
+
+.reveal-delay-600 {
+  animation-delay: 0.6s;
+}
+
+.reveal-delay-700 {
+  animation-delay: 0.7s;
+}
+
+.reveal-delay-800 {
+  animation-delay: 0.8s;
+}
+
+/* Hover Transition Classes for Interactive Elements */
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-glow {
+  transition: box-shadow var(--transition-base);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Smooth Transitions for All Interactive Elements */
+button,
+a,
+.btn,
+.product-card,
+.info-card,
+.nav-menu a {
+  transition: all var(--transition-base);
+}
+
+/* Kinetic Typography Classes */
+.kinetic-text {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.kinetic-letter {
+  display: inline-block;
+  animation: letterReveal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.kinetic-word {
+  display: inline-block;
+  animation: wordSlide 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Typewriter Effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--color-primary);
+  white-space: nowrap;
+  animation: typewriter 4s steps(40) forwards, blinkCursor 0.75s step-end infinite;
+}
+
+/* Skeleton Loading States */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-200) 0%,
+    var(--color-gray-100) 50%,
+    var(--color-gray-200) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-title {
+  height: 2rem;
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+}
+
+.skeleton-button {
+  height: 3rem;
+  width: 120px;
+  border-radius: var(--radius-xl);
+}
+
+/* Floating Action Animation */
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse Effect for Attention */
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Gradient Background Animation */
+.gradient-animated {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Loading Spinner Animation */
+.spinner {
+  animation: rotate 1s linear infinite;
+}
+
+/* Prefers Reduced Motion - Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal-fade,
+  .reveal-up,
+  .reveal-down,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale,
+  .reveal-zoom {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hover-lift:hover,
+  .hover-scale:hover {
+    transform: none !important;
+  }
+
+  .floating,
+  .pulse,
+  .gradient-animated,
+  .spinner,
+  .kinetic-letter,
+  .kinetic-word,
+  .typewriter,
+  .skeleton {
+    animation: none !important;
+  }
+}
+
+/* Page Load Animations */
+.page-enter {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.page-exit {
+  animation: fadeIn 0.3s ease-in-out reverse;
+}
+
+/* Focus Animation for Accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  animation: pulse 1s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :focus-visible {
+    animation: none;
+  }
+}
+
+/* Hero Title Kinetic Typography Effect */
+.hero-title {
+  opacity: 1;
+}
+
+.hero-title.kinetic {
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Product Card Entrance Animation */
+.product-card {
+  opacity: 1;
+}
+
+.product-card.animate-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Info Card Entrance Animation */
+.info-card {
+  opacity: 1;
+}
+
+.info-card.animate-in {
+  animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Button Loading State Animation */
+.btn.loading {
+  pointer-events: none;
+  position: relative;
+}
+
+.btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: rotate 0.6s linear infinite;
+  margin-left: var(--space-sm);
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Link Underline Animation */
+a:not(.btn) {
+  position: relative;
+}
+
+a:not(.btn)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--transition-base);
+}
+
+a:not(.btn):hover::after {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a:not(.btn)::after {
+    display: none;
+  }
+}
