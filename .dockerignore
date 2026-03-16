@@ -1,0 +1,36 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# GitHub
+.github/
+
+# Documentation
+README.md
+*.md
+LICENSE
+
+# Development files
+docker-compose.yml
+.dockerignore
+Dockerfile
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Task files
+arvad_task_files/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
