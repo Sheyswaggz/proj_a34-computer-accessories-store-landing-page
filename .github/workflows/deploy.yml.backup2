@@ -1,0 +1,163 @@
+# ARVAD: This exact code change was already implemented at .github/workflows/deploy.yml:1-163
+name: Deploy Landing Page
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate HTML and CSS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        with:
+          root: .
+          css: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install stylelint
+        run: |
+          npm install -g stylelint stylelint-config-standard
+
+      - name: Lint CSS
+        run: |
+          echo '{"extends": "stylelint-config-standard"}' > .stylelintrc.json
+          stylelint "css/**/*.css" || true
+        continue-on-error: true
+
+  accessibility:
+    name: Accessibility Checks
+    runs-on: ubuntu-latest
+    needs: validate
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pa11y-ci
+        run: npm install -g pa11y-ci
+
+      - name: Setup local server
+        run: |
+          npm install -g http-server
+          http-server . -p 8080 &
+          sleep 5
+
+      - name: Run accessibility tests
+        run: |
+          echo '{"urls": ["http://localhost:8080/index.html"]}' > .pa11yci.json
+          pa11y-ci || true
+        continue-on-error: true
+
+  build:
+    name: Build and Verify Docker Image
+    runs-on: ubuntu-latest
+    needs: [validate, accessibility]
+    if: github.event_name != 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t computer-accessories-store:${{ github.sha }} .
+          docker tag computer-accessories-store:${{ github.sha }} computer-accessories-store:latest
+
+      - name: Test Docker image
+        run: |
+          docker run -d --name test-container -p 8080:80 computer-accessories-store:${{ github.sha }}
+          sleep 5
+
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/status.json)
+          if [ "$STATUS_CODE" -ne 200 ]; then
+            echo "Health check failed with status code: $STATUS_CODE"
+            docker logs test-container
+            exit 1
+          fi
+
+          echo "Health check passed with status code: $STATUS_CODE"
+          docker stop test-container
+          docker rm test-container
+
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Verify deployment
+        run: |
+          sleep 10
+
+          PAGE_URL="${{ steps.deployment.outputs.page_url }}"
+
+          for i in {1..30}; do
+            STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "${PAGE_URL}" || echo "000")
+
+            if [ "$STATUS_CODE" -eq 200 ]; then
+              echo "Deployment verification successful"
+              exit 0
+            fi
+
+            echo "Attempt $i: Status code $STATUS_CODE, retrying..."
+            sleep 10
+          done
+
+          echo "Deployment verification failed after 30 attempts"
+          exit 1
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "Deployment failed for commit ${{ github.sha }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Actor: ${{ github.actor }}"
