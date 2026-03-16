@@ -7,7 +7,7 @@
   'use strict';
 
   const CONFIG = Object.freeze({
-    MODULES: ['AnimationSystem', 'KineticTypography', 'InteractionSystem', 'NavigationSystem'],
+    MODULES: ['AnimationSystem', 'KineticTypography', 'InteractionSystem', 'NavigationSystem', 'FormValidation'],
     INIT_TIMEOUT: 10000,
     PERFORMANCE_MARK_PREFIX: 'app-module-',
     RETRY_ATTEMPTS: 2,
