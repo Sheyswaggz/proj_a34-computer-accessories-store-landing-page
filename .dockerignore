@@ -1,3 +1,4 @@
+# ARVAD: This exact code change was already implemented at .dockerignore:1-36
 # Version control
 .git
 .gitignore

@@ -1,3 +1,4 @@
+# ARVAD: This exact code change was already implemented at Dockerfile:1-51
 FROM nginx:alpine
 
 LABEL maintainer="Computer Accessories Store"
