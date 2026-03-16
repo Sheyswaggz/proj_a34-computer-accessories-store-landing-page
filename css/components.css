@@ -2,7 +2,7 @@
    Computer Accessories Store Landing Page
    ================================================== */
 
-/* Product Card Component with Hover Effects */
+/* Product Card Component with Enhanced Hover Effects */
 .product-card {
   background: var(--color-white);
   border-radius: var(--radius-xl);
@@ -51,7 +51,7 @@
 }
 
 .product-info {
-  padding: var(--space-lg);
+  padding: var(--space-xl);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
@@ -59,14 +59,15 @@
 }
 
 .product-name {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   margin-bottom: var(--space-xs);
+  line-height: var(--line-height-tight);
 }
 
 .product-description {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--space-md);
@@ -79,11 +80,13 @@
   justify-content: space-between;
   gap: var(--space-md);
   margin-top: auto;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-gray-200);
 }
 
 .product-price {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -179,8 +182,8 @@
 .btn-add-to-cart {
   background: var(--gradient-accent);
   color: var(--color-white);
-  padding: var(--space-sm) var(--space-md);
-  font-size: var(--font-size-sm);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   border-radius: var(--radius-lg);
   transition: all var(--transition-base);
@@ -389,18 +392,24 @@ textarea {
   resize: vertical;
 }
 
-/* Social Proof Elements */
+/* Social Proof Elements - Testimonial Cards */
 .testimonial-card {
   background: var(--color-white);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-2xl);
   padding: var(--space-2xl);
   box-shadow: var(--shadow-md);
   transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  height: 100%;
+  border: 1px solid var(--color-gray-200);
 }
 
 .testimonial-card:hover {
   box-shadow: var(--shadow-xl);
   transform: translateY(-4px);
+  border-color: var(--color-primary-light);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -412,23 +421,40 @@ textarea {
 .testimonial-content {
   font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-lg);
+  color: var(--color-text-primary);
   font-style: italic;
+  position: relative;
+  flex: 1;
+}
+
+.testimonial-content::before {
+  content: '"';
+  font-size: var(--font-size-4xl);
+  color: var(--color-primary);
+  position: absolute;
+  top: -0.5rem;
+  left: -0.5rem;
+  font-family: Georgia, serif;
+  opacity: 0.3;
 }
 
 .testimonial-author {
   display: flex;
   align-items: center;
   gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-gray-200);
 }
 
 .testimonial-avatar {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: var(--radius-full);
   overflow: hidden;
   background: var(--gradient-primary);
+  flex-shrink: 0;
+  border: 2px solid var(--color-white);
+  box-shadow: var(--shadow-md);
 }
 
 .testimonial-avatar img {
@@ -437,14 +463,47 @@ textarea {
   object-fit: cover;
 }
 
+.testimonial-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
 .testimonial-name {
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
 }
 
 .testimonial-title {
   font-size: var(--font-size-sm);
   color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Testimonials Grid Layout */
+.testimonials-section {
+  background: var(--color-surface);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  margin-top: var(--space-2xl);
+}
+
+@media (min-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Trust Badge Component */
@@ -452,40 +511,129 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  border: 1px solid var(--color-gray-200);
+}
+
+.trust-badge:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-primary-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-badge:hover {
+    transform: none;
+  }
 }
 
 .trust-badge-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   color: var(--color-success);
+  flex-shrink: 0;
+}
+
+/* Trust Badges Section and Grid */
+.trust-badges-section {
+  background: var(--color-surface);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.trust-badges-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+@media (min-width: 640px) {
+  .trust-badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .trust-badges-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .trust-badges-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
 /* Stats/Numbers Component */
+.stats-section {
+  background: var(--gradient-primary);
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+}
+
+@media (min-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 .stat-card {
   text-align: center;
   padding: var(--space-xl);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-2xl);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-card:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .stat-number {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-5xl);
   font-weight: var(--font-weight-extrabold);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-white);
   margin-bottom: var(--space-sm);
+  line-height: var(--line-height-tight);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .stat-label {
-  font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
 }
 
 /* Badge Component */
@@ -534,5 +682,26 @@ textarea {
 
   .hero-actions .btn {
     width: 100%;
+  }
+
+  .testimonial-card {
+    padding: var(--space-xl);
+  }
+
+  .testimonial-content {
+    font-size: var(--font-size-base);
+  }
+
+  .stat-number {
+    font-size: var(--font-size-4xl);
+  }
+
+  .stat-label {
+    font-size: var(--font-size-base);
+  }
+
+  .trust-badge {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-sm);
   }
 }
